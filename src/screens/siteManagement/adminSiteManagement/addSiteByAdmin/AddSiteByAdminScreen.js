@@ -33,9 +33,6 @@ function AddSiteByAdminScreen() {
 
 	const history = useHistory();
 
-	const admin_Login = useSelector((state) => state.admin_Login);
-	const { adminInfo } = admin_Login;
-
 	const resetHandler = () => {
 		setSiteName("");
 		setCountry("");

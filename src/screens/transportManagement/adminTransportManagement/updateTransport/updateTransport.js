@@ -33,23 +33,21 @@ function EditTransport({ match, history }) {
 	const { adminInfo } = admin_Login;
 
 	useEffect(() => {
-		if (adminInfo != null) {
-			const fetching = async () => {
-				const { data } = await axios.get(`${API_ENDPOINT}/transport/admin/get/${match.params.id}`);
-				setLicensePlate(data.licensePlate);
-				setStartingStation(data.startingStation);
-				setDestinationStation(data.destinationStation);
-				setTotalTravelTime(data.totalTravelTime);
-				setTotalNumberOfSeats(data.totalNumberOfSeats);
-				setTicketPrice(data.ticketPrice);
-				setFacilities(data.facilities);
-				setCityStops(data.cityStops);
-				setMobileNo(data.mobileNo);
-				setLeavingTime(data.leavingTime);
-			};
+		const fetching = async () => {
+			const { data } = await axios.get(`${API_ENDPOINT}/transport/admin/get/${match.params.id}`);
+			setLicensePlate(data.licensePlate);
+			setStartingStation(data.startingStation);
+			setDestinationStation(data.destinationStation);
+			setTotalTravelTime(data.totalTravelTime);
+			setTotalNumberOfSeats(data.totalNumberOfSeats);
+			setTicketPrice(data.ticketPrice);
+			setFacilities(data.facilities);
+			setCityStops(data.cityStops);
+			setMobileNo(data.mobileNo);
+			setLeavingTime(data.leavingTime);
+		};
 
-			fetching();
-		}
+		fetching();
 	}, [match.params.id, adminInfo]);
 
 	const submitHandler = (e) => {

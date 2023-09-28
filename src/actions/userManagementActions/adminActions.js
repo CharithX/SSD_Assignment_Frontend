@@ -59,24 +59,14 @@ export const adminRegister = (name, telephone, address, email, password, pic) =>
 	try {
 		dispatch({ type: ADMIN_REGISTER_REQUEST });
 
-		const config = {
-			headers: {
-				"Content-type": "application/json",
-			},
-		};
-
-		const { data } = await axios.post(
-			`${API_ENDPOINT}/user/admin/register`,
-			{
-				name,
-				telephone,
-				address,
-				email,
-				password,
-				pic,
-			},
-			config
-		);
+		const { data } = await axios.post(`${API_ENDPOINT}/user/admin/register`, {
+			name,
+			telephone,
+			address,
+			email,
+			password,
+			pic,
+		});
 
 		dispatch({ type: ADMIN_REGISTER_SUCCESS, payload: data });
 		swal({
@@ -99,14 +89,9 @@ export const adminViewProfile = (admin) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ADMIN_VIEW_REQUEST });
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${adminInfo.token}`,
 			},
 		};
 
@@ -130,14 +115,9 @@ export const adminUpdateProfile = (admin) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: ADMIN_UPDATE_REQUEST });
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${adminInfo.token}`,
 			},
 		};
 

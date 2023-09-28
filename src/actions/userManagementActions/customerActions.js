@@ -78,59 +78,49 @@ export const customerLogout = () => async (dispatch) => {
 export const customerRegister =
 	(firstName, lastName, telephone, address, gender, country, email, password, pic) => async (dispatch) => {
 		try {
-			dispatch({ type: CUSTOMER_REGISTER_REQUEST });
+			dispatch({
+				type: CUSTOMER_REGISTER_REQUEST,
+			});
 
-			const config = {
-				headers: {
-					"Content-type": "application/json",
-				},
-			};
+			const { data } = await axios.post(`${API_ENDPOINT}/user/customer/register`, {
+				firstName,
+				lastName,
+				telephone,
+				address,
+				gender,
+				country,
+				email,
+				password,
+				pic,
+			});
 
-			//call the backend route
-			const { data } = await axios.post(
-				`${API_ENDPOINT}/user/customer/register`,
-				{
-					firstName,
-					lastName,
-					telephone,
-					address,
-					gender,
-					country,
-					email,
-					password,
-					pic,
-				},
-				config
-			);
-
-			dispatch({ type: CUSTOMER_REGISTER_SUCCESS, payload: data });
+			dispatch({
+				type: CUSTOMER_REGISTER_SUCCESS,
+				payload: data,
+			});
 			Swal.fire({
 				title: "Success !!!",
 				text: "Customer Registration Successful.",
 				icon: "success",
 				timer: 2000,
-				button: false,
 			});
 		} catch (error) {
+			const message = error.response && error.response.data.message ? error.response.data.message : error.message;
 			dispatch({
 				type: CUSTOMER_REGISTER_FAIL,
-				payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+				payload: message,
 			});
 		}
 	};
+
 // customer to view their profile action
 export const customerViewProfile = (customer) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: CUSTOMER_VIEW_REQUEST });
 
-		const {
-			customer_Login: { customerInfo },
-		} = getState();
-
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${customerInfo.token}`,
 			},
 		};
 
@@ -155,14 +145,9 @@ export const customerUpdateProfile = (customer) => async (dispatch, getState) =>
 	try {
 		dispatch({ type: CUSTOMER_UPDATE_REQUEST });
 
-		const {
-			customer_Login: { customerInfo },
-		} = getState();
-
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${customerInfo.token}`,
 			},
 		};
 
@@ -194,14 +179,9 @@ export const customerDeleteProfile = () => async (dispatch, getState) => {
 	try {
 		dispatch({ type: CUSTOMER_DELETE_REQUEST });
 
-		const {
-			customer_Login: { customerInfo },
-		} = getState();
-		console.log(customerInfo);
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${customerInfo.token}`,
 			},
 		};
 
@@ -227,10 +207,6 @@ export const customersList = () => async (dispatch, getState) => {
 			type: CUSTOMER_LIST_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		//call the backend route
 		const { data } = await axios.get(`${API_ENDPOINT}/user/admin/customers`);
 
@@ -255,10 +231,6 @@ export const customerViewProfileById =
 			dispatch({
 				type: CUSTOMER_VIEW_BY_ID_REQUEST,
 			});
-
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
 
 			//call the backend route
 			const { data } = await axios.get(`${API_ENDPOINT}/user/admin/customer/profile/view/${id}`, {
@@ -295,10 +267,6 @@ export const customerUpdateProfileById =
 			dispatch({
 				type: CUSTOMER_UPDATE_BY_ID_REQUEST,
 			});
-
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
 
 			//call the backend route
 			const { data } = await axios.put(`${API_ENDPOINT}/user/admin/customer/profile/edit/${id}`, {
@@ -340,10 +308,6 @@ export const customerDeleteProfileById = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: CUSTOMER_DELETE_BY_ID_REQUEST,
 		});
-
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		//call the backend route
 		const { data } = await axios.delete(`${API_ENDPOINT}/user/admin/customer/profile/view/${id}`);

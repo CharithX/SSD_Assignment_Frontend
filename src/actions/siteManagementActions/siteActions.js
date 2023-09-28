@@ -49,10 +49,6 @@ export const sitesListForAdmin = () => async (dispatch, getState) => {
 			type: SITES_LIST_FOR_ADMIN_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const { data } = await axios.get(`${API_ENDPOINT}/sites/admin/get`);
 
 		dispatch({
@@ -103,15 +99,11 @@ export const createSite =
 		specialInstructions,
 		moreInfoURL
 	) =>
-	async (dispatch, getState) => {
+	async (dispatch) => {
 		try {
 			dispatch({
 				type: SITES_CREATE_REQUEST,
 			});
-
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
 
 			const { data } = await axios.post(`${API_ENDPOINT}/sites/admin/add`, {
 				siteName,
@@ -167,10 +159,6 @@ export const updateSiteByAdmin =
 				type: SITES_UPDATE_BY_ADMIN_REQUEST,
 			});
 
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
-
 			const { data } = await axios.put(`${API_ENDPOINT}/sites/admin/get/${id}`, {
 				siteName,
 				country,
@@ -203,10 +191,6 @@ export const deleteSiteByAdmin = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: SITES_DELETE_BY_ADMIN_REQUEST,
 		});
-
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/sites/admin/get/${id}`);
 

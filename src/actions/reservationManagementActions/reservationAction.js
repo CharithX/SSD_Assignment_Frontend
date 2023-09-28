@@ -50,10 +50,6 @@ export const hotelListReservation = (id) => async (dispatch, getState) => {
 			type: ADMIN_RESERVATION_LIST_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const { data } = await axios.get(`${API_ENDPOINT}/reservations/get-reservations/${id}`);
 
 		dispatch({
@@ -75,10 +71,6 @@ export const createReservationAction =
 			dispatch({
 				type: RESERVATION_CREATE_REQUEST,
 			});
-
-			const {
-				customer_Login: { customerInfo },
-			} = getState();
 
 			const date1 = new Date(checkInDate);
 			const date2 = new Date(checkOutDate);
@@ -125,10 +117,6 @@ export const updateReservationAction = (id, rooms) => async (dispatch, getState)
 			type: RESERVATION_UPDATE_REQUEST,
 		});
 
-		const {
-			customer_Login: { customerInfo },
-		} = getState();
-
 		const noOfRooms = rooms;
 
 		const { data } = await axios.put(`${API_ENDPOINT}/reservations/reservation/update/${id}`, { noOfRooms });
@@ -158,10 +146,6 @@ export const deleteReservationAction = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: RESERVATION_DELETE_REQUEST,
 		});
-
-		const {
-			customer_Login: { customerInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/reservations/reservation/delete/${id}`);
 

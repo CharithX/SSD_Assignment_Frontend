@@ -87,22 +87,20 @@ const CustomerEditByAdminScreen = ({ match }) => {
 	};
 
 	useEffect(() => {
-		if (adminInfo != null) {
-			const fetching = async () => {
-				const { data } = await axios.get(`${API_ENDPOINT}/user/admin/customer/profile/view/${match.params.id}`);
-				setFirstName(data.firstName);
-				setLastName(data.lastName);
-				setGender(data.gender);
-				setTelephone(data.telephone);
-				setAddress(data.address);
-				setCountry(data.country);
-				setEmail(data.email);
-				setPic(data.pic);
-				setRegDate(data.regDate);
-			};
+		const fetching = async () => {
+			const { data } = await axios.get(`${API_ENDPOINT}/user/admin/customer/profile/view/${match.params.id}`);
+			setFirstName(data.firstName);
+			setLastName(data.lastName);
+			setGender(data.gender);
+			setTelephone(data.telephone);
+			setAddress(data.address);
+			setCountry(data.country);
+			setEmail(data.email);
+			setPic(data.pic);
+			setRegDate(data.regDate);
+		};
 
-			fetching();
-		}
+		fetching();
 	}, [match.params.id, adminInfo]);
 
 	return (

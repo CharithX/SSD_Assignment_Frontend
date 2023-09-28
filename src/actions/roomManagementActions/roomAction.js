@@ -25,10 +25,6 @@ export const listRoomAdmin = (id) => async (dispatch, getState) => {
 			type: ROOM_LIST_ADMIN_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const { data } = await axios.get(`${API_ENDPOINT}/rooms/get-rooms/${id}`);
 
 		dispatch({
@@ -120,10 +116,6 @@ export const updateRoomAction =
 				type: ROOM_UPDATE_ADMIN_REQUEST,
 			});
 
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
-
 			const { data } = await axios.put(`${API_ENDPOINT}/rooms/room/${id}`, {
 				roomType,
 				availability,
@@ -160,9 +152,6 @@ export const deleteRoomAction = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: ROOM_DELETE_ADMIN_REQUEST,
 		});
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/rooms/room/delete/${id}`);
 

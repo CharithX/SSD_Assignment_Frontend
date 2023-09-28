@@ -46,10 +46,6 @@ export const transportListForAdmin = () => async (dispatch, getState) => {
 			type: TRANSPORT_LIST_FOR_ADMIN_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const { data } = await axios.get(`${API_ENDPOINT}/transport/admin/get`);
 
 		dispatch({
@@ -83,10 +79,6 @@ export const createTransport =
 			dispatch({
 				type: TRANSPORT_CREATE_REQUEST,
 			});
-
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
 
 			const { data } = await axios.post(`${API_ENDPOINT}/transport/admin/add`, {
 				licensePlate,
@@ -140,10 +132,6 @@ export const UpdateTransport =
 				type: TRANSPORT_UPDATE_BY_ADMIN_REQUEST,
 			});
 
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
-
 			const { data } = await axios.put(`${API_ENDPOINT}/transport/admin/get/${id}`, {
 				licensePlate,
 				startingStation,
@@ -175,10 +163,6 @@ export const deleteTranspoterByAdmin = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: TRANSPORT_DELETE_BY_ADMIN_REQUEST,
 		});
-
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/transport/admin/get/${id}`);
 

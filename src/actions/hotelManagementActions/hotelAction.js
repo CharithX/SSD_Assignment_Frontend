@@ -116,10 +116,6 @@ export const updateHotelAction =
 				type: HOTEL_UPDATE_ADMIN_REQUEST,
 			});
 
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
-
 			const { data } = await axios.put(`${API_ENDPOINT}/hotels/hotel/${id}`, {
 				hotelName,
 				address,
@@ -156,9 +152,6 @@ export const deleteHotelAction = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: HOTEL_DELETE_ADMIN_REQUEST,
 		});
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/hotels/hotel/delete/${id}`);
 

@@ -25,9 +25,6 @@ export const GuideAddAction =
 			dispatch({
 				type: TOUR_GUIDE_ADD_REQUEST,
 			});
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
 
 			const { data } = await axios.post(`${API_ENDPOINT}/guide/admin/add`, {
 				name,
@@ -72,10 +69,6 @@ export const GuideListAction = () => async (dispatch, getState) => {
 			type: TOUR_GUIDE_VIEW_REQUEST,
 		});
 
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
-
 		const { data } = await axios.get(`${API_ENDPOINT}/guide/admin/get`);
 
 		dispatch({
@@ -119,10 +112,6 @@ export const GuideUpdateAction =
 				type: TOUR_GUIDE_UPDATE_REQUEST,
 			});
 
-			const {
-				admin_Login: { adminInfo },
-			} = getState();
-
 			const { data } = await axios.put(`${API_ENDPOINT}/guide/admin/get/${id}`, {
 				name,
 				gender,
@@ -157,10 +146,6 @@ export const GuideDeleteAction = (id) => async (dispatch, getState) => {
 		dispatch({
 			type: TOUR_GUIDE_DELETE_REQUEST,
 		});
-
-		const {
-			admin_Login: { adminInfo },
-		} = getState();
 
 		const { data } = await axios.delete(`${API_ENDPOINT}/guide/admin/get/${id}`);
 

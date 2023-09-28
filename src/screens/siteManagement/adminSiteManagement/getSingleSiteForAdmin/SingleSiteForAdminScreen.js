@@ -87,24 +87,22 @@ function SingleSiteForAdminScreen({ match, history }) {
 	};
 
 	useEffect(() => {
-		if (adminInfo != null) {
-			const fetching = async () => {
-				const { data } = await axios.get(`${API_ENDPOINT}/sites/admin/get/${match.params.id}`);
-				setSiteName(data.siteName);
-				setCountry(data.country);
-				setProvince(data.province);
-				setSiteLocation(data.siteLocation);
-				setPostalCode(data.postalCode);
-				setDescription(data.description);
-				setPicUrl(data.picURL);
-				setRecommendations(data.recommendations);
-				setSpecialEvents(data.specialEvents);
-				setSpecialInstructions(data.specialInstructions);
-				setMoreInfoURL(data.moreInfoURL);
-			};
+		const fetching = async () => {
+			const { data } = await axios.get(`${API_ENDPOINT}/sites/admin/get/${match.params.id}`);
+			setSiteName(data.siteName);
+			setCountry(data.country);
+			setProvince(data.province);
+			setSiteLocation(data.siteLocation);
+			setPostalCode(data.postalCode);
+			setDescription(data.description);
+			setPicUrl(data.picURL);
+			setRecommendations(data.recommendations);
+			setSpecialEvents(data.specialEvents);
+			setSpecialInstructions(data.specialInstructions);
+			setMoreInfoURL(data.moreInfoURL);
+		};
 
-			fetching();
-		}
+		fetching();
 	}, [match.params.id, adminInfo]);
 
 	const updateHandler = async (e) => {
